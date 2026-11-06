@@ -1,13 +1,13 @@
-package dev.concurx.concurx.execution;
+package dev.concurx.concurx.execution.engine;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class Engine {
+public class ExecutionEngine {
     private final ThreadPoolExecutor executor;
 
-    public Engine(){
+    public ExecutionEngine(){
         this.executor = new ThreadPoolExecutor(
                 2,                           // Core pool size
                 5,                                      // Maximum pool size
@@ -26,9 +26,13 @@ public class Engine {
         executor.shutdown();
         try {
             if (!executor.awaitTermination(30, TimeUnit.SECONDS)) {
+                System.out.println("Graceful shutdown timed out. Forcing shutdown...");
                 executor.shutdownNow();
+            } else {
+                System.out.println("Executor terminated successfully.");
             }
         } catch (InterruptedException e) {
+            System.out.println("Shutdown process interrupted.");
             executor.shutdownNow();
             Thread.currentThread().interrupt();
         }
