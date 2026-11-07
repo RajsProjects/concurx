@@ -13,13 +13,13 @@ public class Task implements Runnable {
     @Override
     public void run() {
         System.out.println(
-                "Task " + id +
+                "Task id " + id +
                         " | " + name +
                         " | Thread: " + Thread.currentThread().getName()
         );
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
 

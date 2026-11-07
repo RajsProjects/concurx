@@ -1,5 +1,6 @@
 package dev.concurx.concurx.execution.engine;
 
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +26,7 @@ public class ExecutionEngine {
     public void shutdown(){
         executor.shutdown();
         try {
-            if (!executor.awaitTermination(30, TimeUnit.SECONDS)) {
+            if (!executor.awaitTermination(120, TimeUnit.SECONDS)) {
                 System.out.println("Graceful shutdown timed out. Forcing shutdown...");
                 executor.shutdownNow();
             } else {
@@ -36,5 +37,9 @@ public class ExecutionEngine {
             executor.shutdownNow();
             Thread.currentThread().interrupt();
         }
+    }
+
+    public List<Runnable> forceShutdown(){
+        return executor.shutdownNow();
     }
 }
