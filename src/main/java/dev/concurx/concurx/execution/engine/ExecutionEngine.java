@@ -1,5 +1,7 @@
 package dev.concurx.concurx.execution.engine;
 
+import dev.concurx.concurx.execution.task.TaskWrapper;
+
 import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
@@ -34,8 +36,12 @@ public class ExecutionEngine {
         );
     }
 
-    public void submit(Runnable task){
-        executor.execute(task);
+    public TaskWrapper submit(Runnable task) {
+        TaskWrapper wrapper = new TaskWrapper(task);
+
+        executor.execute(wrapper);
+
+        return wrapper;
     }
 
     public void shutdown() {

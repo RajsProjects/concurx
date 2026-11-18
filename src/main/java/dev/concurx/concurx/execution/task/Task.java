@@ -1,4 +1,4 @@
-package dev.concurx.concurx.task;
+package dev.concurx.concurx.execution.task;
 
 public class Task implements Runnable {
 

@@ -1,4 +1,4 @@
-package dev.concurx.concurx.concurrencyTests;
+package dev.concurx.concurx.execution.task;
 
 import dev.concurx.concurx.execution.engine.ExecutionEngine;
 import org.junit.jupiter.api.Test;
